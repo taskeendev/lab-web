@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes } from 'react-router'
+import ThemeToggle from './components/ThemeToggle'
 import Home from './pages/Home'
 import System from './pages/System'
 import Login from './pages/Login'
@@ -32,6 +33,9 @@ export default function App() {
               {item.label}
             </NavLink>
           ))}
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
         </nav>
       </header>
       <main className="mx-auto max-w-4xl px-4 py-8">
