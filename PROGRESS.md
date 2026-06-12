@@ -12,10 +12,12 @@
 - [x] 3. i18n EN/TH เขียนเอง (typed keys) — 2026-06-12
 - [x] 4. Auth client: login/register/refresh อัตโนมัติ/logout + AuthContext + protected routes — 2026-06-12
 - [x] 5. หน้า Login/Register/Account จริง + field errors (RFC 7807) + ตัวบอกสถานะ API — 2026-06-12
-- [ ] 6. หน้า Home + System ตามปรัชญา "ให้งานพูดเอง" (2 ภาษา)
+- [x] 6. หน้า Home + System ตามปรัชญา "ให้งานพูดเอง" (2 ภาษา) — 2026-06-12
 - [ ] 7. Deploy Vercel + GitHub Actions CI → URL จริง (เกณฑ์ผ่านเฟส)
 
 ## Log การทำงาน
+
+- 2026-06-12 — ขั้น 6 เสร็จ: Home = ตารางฟีเจอร์ 10 ตัวพร้อมป้ายสถานะ (live/building/planned — สถานะอยู่ใน data/features.ts, คำบรรยายอยู่ใน locale) + เครดิตบรรทัดเดียวท้ายหน้า; System = intro "เว็บนี้ไม่ใช่โบรชัวร์ มันคือตัวระบบเอง" + diagram + การตัดสินใจ 4 ข้อพร้อมเหตุผล (jwt/env/microservices/token ใน memory) + ลิงก์ repos; เนื้อหาครบสองภาษา compiler คุม; พลาดเล็กระหว่างทาง: key status ซ้ำ + ทำ system หาย → จับได้จาก tsc แก้ทันที
 
 - 2026-06-12 — ขั้น 5 เสร็จ: Login (error เดี่ยว), Register (field errors รายช่องจาก problem.errors ใต้ input ตรง ๆ + auto-login หลังสมัคร), Account (ข้อมูล + logout); ApiStatus จุดเขียว/แดงใน footer ping /health ทุก 30s (เพิ่ม /health เข้า vite proxy + healthUrl ใน config) — เว็บ static อยู่ได้เอง บอกตรง ๆ เมื่อ backend ไม่พร้อม; verify: tsc/build, ทุกหน้า transform, health ผ่าน proxy, validation errors รูปร่างตรงที่ฟอร์มใช้
 

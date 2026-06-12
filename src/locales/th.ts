@@ -12,9 +12,80 @@ export const th: Dict = {
   home: {
     title: 'Feature Lab',
     tagline: 'ระบบจริงที่ค่อย ๆ สร้างทีละฟีเจอร์ — พร้อมคำอธิบายทุกชิ้น',
+    featuresTitle: 'ฟีเจอร์',
+    builtBy: 'สร้างแบบเปิดเผยโดย',
   },
   system: {
     title: 'ระบบ',
+    intro: 'เว็บนี้ไม่ใช่โบรชัวร์ — มันคือตัวระบบเอง ทุกอย่างในหน้าแรกทำงานจริงอยู่ที่นี่ และหน้านี้อธิบายว่าทำอย่างไรและทำไม',
+    archTitle: 'สถาปัตยกรรม',
+    decisionsTitle: 'การตัดสินใจออกแบบ',
+    reposTitle: 'ซอร์สโค้ด',
+    decisions: {
+      jwt: {
+        title: 'JWT อายุสั้น + refresh แบบหมุนเวียน',
+        why: 'service ตรวจ access token ได้เองโดยไม่ต้องวิ่งถามใคร ขณะที่ยังเพิกถอน session ได้ผ่าน refresh token ที่เก็บฝั่ง server — token ที่ถูกหมุนทิ้งแล้วโผล่ซ้ำถือเป็นสัญญาณขโมย และระบบจะเผาทุก session ของผู้ใช้คนนั้นทันที',
+      },
+      env: {
+        title: 'ทุกค่าผ่าน environment variables',
+        why: 'ไม่มี URL, secret หรือลิมิตฝังในโค้ดเลย — build เดียวกันรันได้ทั้งบนเครื่อง dev และ production และการลืมตั้ง secret จะพังตั้งแต่ boot แทนที่จะแอบใช้ค่าอ่อนแอ',
+      },
+      micro: {
+        title: 'Microservices แยก repo ต่อ service',
+        why: 'แต่ละ service เป็นเจ้าของ schema, เทสต์ และ CI ของตัวเอง — เส้นแบ่งจริงใจเพราะการข้ามมันต้องผ่าน network จริง',
+      },
+      memToken: {
+        title: 'Access token อยู่ในหน่วยความจำเท่านั้น',
+        why: 'ไม่มีอะไรที่ JavaScript อ่านได้เก็บ session ไว้ — HttpOnly cookie เป็นผู้รอด ส่วนหน้าเว็บเป็นผู้ลืม',
+      },
+    },
+  },
+  featureStatus: {
+    live: 'ใช้งานจริง',
+    building: 'กำลังสร้าง',
+    planned: 'ในแผน',
+  },
+  features: {
+    auth: {
+      name: 'ระบบยืนยันตัวตน',
+      desc: 'สมัคร/เข้าสู่ระบบด้วย JWT อายุสั้น รหัสผ่าน hash ด้วย BCrypt, error ตามมาตรฐาน RFC 7807 พร้อมรายละเอียดรายช่อง',
+    },
+    sessions: {
+      name: 'Session แบบหมุนเวียน',
+      desc: 'Refresh token อยู่ใน HttpOnly cookie หมุนใหม่ทุกครั้งที่ใช้ — ใช้ token ที่ถูกหมุนทิ้งซ้ำ = เผาทุก session ของผู้ใช้นั้น',
+    },
+    darkMode: {
+      name: 'โหมดมืด',
+      desc: 'สามสถานะ (ตามระบบ / สว่าง / มืด) จำค่าไว้ และทาสีก่อนเฟรมแรก — เครื่องธีมมืดไม่เห็นจอขาววาบ',
+    },
+    i18n: {
+      name: 'สองภาษา',
+      desc: 'พจนานุกรม EN/TH เขียนเอง — compiler บังคับให้สองภาษาตรงกันเสมอ แปลตกหล่น = build ไม่ผ่าน',
+    },
+    apiStatus: {
+      name: 'สถานะ API',
+      desc: 'Footer เช็คชีพจร backend และบอกตรง ๆ เมื่อออฟไลน์ — เว็บ static ยืนได้ด้วยตัวเอง',
+    },
+    presence: {
+      name: 'Presence แบบ realtime',
+      desc: 'ติดตาม online/offline ผ่าน WebSocket พร้อม dashboard ฝั่งแอดมิน',
+    },
+    feed: {
+      name: 'Community feed',
+      desc: 'โพสต์ คอมเมนต์ ไลก์ — โดยผู้ใช้ที่เข้าสู่ระบบทุกคน',
+    },
+    contact: {
+      name: 'ติดต่อ',
+      desc: 'ข้อความถูกเก็บ โผล่ในหน้าแอดมิน และส่งต่อทางอีเมล',
+    },
+    gateway: {
+      name: 'Gateway',
+      desc: 'gateway เขียนเองคั่นหน้า services: routing, rate limit, TLS',
+    },
+    twoFactor: {
+      name: '2FA และ social login',
+      desc: 'ยืนยันสองชั้นแบบ TOTP, เข้าสู่ระบบผ่าน OAuth และ reset รหัสผ่านทางอีเมล',
+    },
   },
   auth: {
     loginTitle: 'เข้าสู่ระบบ',
