@@ -9,13 +9,15 @@
 
 - [x] 1. โครง: Vite+React+TS + Tailwind v4 + shadcn/ui + react-router + 5 หน้าโครง + วินัย env — 2026-06-12
 - [x] 2. Dark mode: toggle + จำค่า + ตาม OS เป็น default — 2026-06-12
-- [ ] 3. i18n EN/TH เขียนเอง (typed keys)
+- [x] 3. i18n EN/TH เขียนเอง (typed keys) — 2026-06-12
 - [ ] 4. Auth client: login/register/refresh อัตโนมัติ/logout + AuthContext + protected routes
 - [ ] 5. หน้า Login/Register/Account จริง + field errors (RFC 7807) + ตัวบอกสถานะ API
 - [ ] 6. หน้า Home + System ตามปรัชญา "ให้งานพูดเอง" (2 ภาษา)
 - [ ] 7. Deploy Vercel + GitHub Actions CI → URL จริง (เกณฑ์ผ่านเฟส)
 
 ## Log การทำงาน
+
+- 2026-06-12 — ขั้น 3 เสร็จ: i18n ~60 บรรทัดไม่มี lib — en เป็นแม่แบบ, DeepString mapped type ขยาย literal → string, th: Dict ถูก compiler บังคับ key ครบ (พิสูจน์: ลบ key ทิ้ง → TS2741 ทันที); useT() คืน dict ทั้งก้อน = เข้าถึง t.nav.home ตรง ๆ autocomplete เต็ม ไม่มี string key; LangToggle + จำ localStorage + ตั้ง html lang
 
 - 2026-06-12 — ขั้น 2 เสร็จ: ThemeProvider 3 สถานะ (system/light/dark) — จำใน localStorage, โหมด system ฟัง matchMedia change (OS สลับกลางคันตามทัน), toggle วนสามสถานะด้วยไอคอน Sun/Moon/Monitor; กัน FOUC ด้วย inline script ใน head (ทาสี .dark ก่อน React โหลด) + พิสูจน์ logic headless 5 เคส
 

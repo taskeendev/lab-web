@@ -1,20 +1,22 @@
 import { NavLink, Route, Routes } from 'react-router'
+import LangToggle from './components/LangToggle'
 import ThemeToggle from './components/ThemeToggle'
+import { useT } from './i18n'
 import Home from './pages/Home'
 import System from './pages/System'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Account from './pages/Account'
 
-const nav = [
-  { to: '/', label: 'Home' },
-  { to: '/system', label: 'System' },
-  { to: '/login', label: 'Login' },
-  { to: '/register', label: 'Register' },
-  { to: '/account', label: 'Account' },
-]
-
 export default function App() {
+  const t = useT()
+  const nav = [
+    { to: '/', label: t.nav.home },
+    { to: '/system', label: t.nav.system },
+    { to: '/login', label: t.nav.login },
+    { to: '/register', label: t.nav.register },
+    { to: '/account', label: t.nav.account },
+  ]
   return (
     <div className="min-h-screen bg-background text-foreground">
       <header className="border-b">
@@ -33,7 +35,8 @@ export default function App() {
               {item.label}
             </NavLink>
           ))}
-          <div className="ml-auto">
+          <div className="ml-auto flex items-center gap-1">
+            <LangToggle />
             <ThemeToggle />
           </div>
         </nav>
