@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from 'react-router'
 import LangToggle from './components/LangToggle'
+import ProtectedRoute from './components/ProtectedRoute'
 import ThemeToggle from './components/ThemeToggle'
 import { useT } from './i18n'
 import Home from './pages/Home'
@@ -47,7 +48,14 @@ export default function App() {
           <Route path="/system" element={<System />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/account" element={<Account />} />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
     </div>
