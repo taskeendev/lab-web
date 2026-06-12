@@ -1,0 +1,20 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+import path from 'node:path'
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  server: {
+    // dev: เรียก /api แบบ same-origin แล้ว vite ส่งต่อให้ auth-service
+    // (ตัด CORS/cookie cross-origin ออกจากสมการตอนพัฒนา)
+    proxy: {
+      '/api': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
+    },
+  },
+})
