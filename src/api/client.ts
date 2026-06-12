@@ -47,11 +47,11 @@ async function parseError(res: Response): Promise<never> {
   throw new ApiError(problem)
 }
 
-async function rawFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+async function rawFetch<T>(path: string, init: RequestInit = {}, base = config.apiBaseUrl): Promise<T> {
   const headers = new Headers(init.headers)
   headers.set('Content-Type', 'application/json')
   if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`)
-  const res = await fetch(`${config.apiBaseUrl}${path}`, {
+  const res = await fetch(`${base}${path}`, {
     ...init,
     headers,
     credentials: 'include', // ให้ refresh cookie เดินทางไป-กลับ
@@ -61,16 +61,25 @@ async function rawFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
 }
 
 // พยายาม refresh หนึ่งครั้งเมื่อเจอ 401 แล้ว retry — หมดสิทธิ์จริงค่อยโยนต่อ
-export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+async function fetchWithRetry<T>(path: string, init: RequestInit, base: string): Promise<T> {
   try {
-    return await rawFetch<T>(path, init)
+    return await rawFetch<T>(path, init, base)
   } catch (e) {
     if (e instanceof ApiError && e.problem.status === 401 && accessToken) {
       const refreshed = await refresh()
-      if (refreshed) return rawFetch<T>(path, init)
+      if (refreshed) return rawFetch<T>(path, init, base)
     }
     throw e
   }
+}
+
+export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+  return fetchWithRetry(path, init, config.apiBaseUrl)
+}
+
+// feed-service อยู่คนละ base — token ใบเดิมใช้ได้ทุก service (stateless JWT)
+export async function feedFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+  return fetchWithRetry(path, init, config.feedApiBaseUrl)
 }
 
 export async function refresh(): Promise<boolean> {

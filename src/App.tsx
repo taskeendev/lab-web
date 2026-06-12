@@ -6,6 +6,7 @@ import ThemeToggle from './components/ThemeToggle'
 import { useAuth } from './auth'
 import { useT } from './i18n'
 import Home from './pages/Home'
+import Feed from './pages/Feed'
 import System from './pages/System'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -17,6 +18,7 @@ export default function App() {
   const { user } = useAuth()
   const nav = [
     { to: '/', label: t.nav.home },
+    { to: '/feed', label: t.nav.feed },
     { to: '/system', label: t.nav.system },
     { to: '/login', label: t.nav.login },
     { to: '/register', label: t.nav.register },
@@ -51,6 +53,7 @@ export default function App() {
       <main className="mx-auto max-w-4xl flex-1 px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/feed" element={<Feed />} />
           <Route path="/system" element={<System />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
