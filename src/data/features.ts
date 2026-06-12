@@ -24,7 +24,7 @@ export const features: Feature[] = [
   { id: 'apiStatus', status: 'live' },
   { id: 'presence', status: 'live' },
   { id: 'feed', status: 'live' },
-  { id: 'contact', status: 'planned' },
+  { id: 'contact', status: 'live' },
   { id: 'gateway', status: 'planned' },
   { id: 'twoFactor', status: 'planned' },
 ]
@@ -34,4 +34,5 @@ export const repos = [
   { name: 'lab-auth-service', url: 'https://github.com/taskeendev/lab-auth-service' },
   { name: 'lab-presence-service', url: 'https://github.com/taskeendev/lab-presence-service' },
   { name: 'lab-feed-service', url: 'https://github.com/taskeendev/lab-feed-service' },
+  { name: 'lab-contact-service', url: 'https://github.com/taskeendev/lab-contact-service' },
 ]

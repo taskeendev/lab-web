@@ -4,6 +4,7 @@
 export const config = {
   apiBaseUrl: import.meta.env.VITE_API_URL ?? '/api',
   feedApiBaseUrl: import.meta.env.VITE_FEED_API_URL ?? '/api',
+  contactApiBaseUrl: import.meta.env.VITE_CONTACT_API_URL ?? '/api',
   healthUrl: import.meta.env.VITE_HEALTH_URL ?? '/health',
   presenceWsUrl:
     import.meta.env.VITE_PRESENCE_WS_URL ??

@@ -82,6 +82,10 @@ export async function feedFetch<T>(path: string, init: RequestInit = {}): Promis
   return fetchWithRetry(path, init, config.feedApiBaseUrl)
 }
 
+export async function contactFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+  return fetchWithRetry(path, init, config.contactApiBaseUrl)
+}
+
 export async function refresh(): Promise<boolean> {
   try {
     const token = await rawFetch<TokenResponse>('/auth/refresh', { method: 'POST' })

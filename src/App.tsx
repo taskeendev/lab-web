@@ -7,6 +7,7 @@ import { useAuth } from './auth'
 import { useT } from './i18n'
 import Home from './pages/Home'
 import Feed from './pages/Feed'
+import Contact from './pages/Contact'
 import System from './pages/System'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -19,6 +20,7 @@ export default function App() {
   const nav = [
     { to: '/', label: t.nav.home },
     { to: '/feed', label: t.nav.feed },
+    { to: '/contact', label: t.nav.contact },
     { to: '/system', label: t.nav.system },
     { to: '/login', label: t.nav.login },
     { to: '/register', label: t.nav.register },
@@ -54,6 +56,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/feed" element={<Feed />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/system" element={<System />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

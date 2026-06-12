@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react'
 import { useT } from '@/i18n'
 import { usePresence } from '@/presence'
 import { cn } from '@/lib/utils'
+import { deleteMessage, fetchInbox, markRead } from '@/api/contact'
+import type { ContactMessage } from '@/api/contact'
 
 const time = (iso: string) => new Date(iso).toLocaleTimeString()
 
@@ -51,6 +54,87 @@ export default function Admin() {
             ))}
           </tbody>
         </table>
+      )}
+
+      <ContactInbox />
+    </div>
+  )
+}
+
+function ContactInbox() {
+  const t = useT()
+  const [items, setItems] = useState<ContactMessage[]>([])
+  const [unread, setUnread] = useState(0)
+
+  useEffect(() => {
+    fetchInbox()
+      .then((inbox) => {
+        setItems(inbox.items)
+        setUnread(inbox.unread)
+      })
+      .catch(() => {}) // contact-service ไม่ขึ้น = กล่องว่างเฉย ๆ ไม่พังหน้า
+  }, [])
+
+  const read = async (id: number) => {
+    const updated = await markRead(id)
+    setItems((prev) => prev.map((m) => (m.id === id ? updated : m)))
+    setUnread((n) => n - 1)
+  }
+
+  const remove = async (m: ContactMessage) => {
+    if (!window.confirm(t.inbox.deleteConfirm)) return
+    await deleteMessage(m.id)
+    setItems((prev) => prev.filter((x) => x.id !== m.id))
+    if (!m.readAt) setUnread((n) => n - 1)
+  }
+
+  return (
+    <div className="space-y-3 pt-4">
+      <div className="flex items-center gap-3">
+        <h2 className="text-xl font-semibold">{t.inbox.title}</h2>
+        {unread > 0 && (
+          <span className="rounded-full bg-rose-500/15 px-2 py-0.5 font-mono text-xs text-rose-600 dark:text-rose-400">
+            {unread} {t.inbox.unread}
+          </span>
+        )}
+      </div>
+      {items.length === 0 ? (
+        <p className="text-muted-foreground">{t.inbox.empty}</p>
+      ) : (
+        <ul className="space-y-3">
+          {items.map((m) => (
+            <li
+              key={m.id}
+              className={cn('space-y-2 rounded-lg border p-4', !m.readAt && 'border-rose-500/40')}
+            >
+              <div className="flex items-baseline gap-2 text-sm">
+                {!m.readAt && <span className="size-2 shrink-0 self-center rounded-full bg-rose-500" />}
+                <span className="font-semibold">{m.name}</span>
+                <a href={`mailto:${m.email}`} className="font-mono text-xs text-muted-foreground hover:underline">
+                  {m.email}
+                </a>
+                <span className="ml-auto text-xs text-muted-foreground">
+                  {new Date(m.createdAt).toLocaleString()}
+                </span>
+              </div>
+              <p className="whitespace-pre-wrap text-sm">{m.message}</p>
+              <div className="flex gap-3 text-xs">
+                {m.readAt ? (
+                  <span className="text-muted-foreground">
+                    {t.inbox.readAt} {new Date(m.readAt).toLocaleString()}
+                  </span>
+                ) : (
+                  <button onClick={() => void read(m.id)} className="text-muted-foreground hover:text-foreground">
+                    {t.inbox.markRead}
+                  </button>
+                )}
+                <button onClick={() => void remove(m)} className="text-muted-foreground hover:text-destructive">
+                  {t.inbox.delete}
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   )

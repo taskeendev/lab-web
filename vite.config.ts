@@ -17,6 +17,7 @@ export default defineConfig({
       // เส้นทางเจาะจงต้องมาก่อน /api รวม — feed-service อยู่คนละพอร์ตกับ auth
       '/api/posts': process.env.VITE_FEED_PROXY_TARGET ?? 'http://localhost:8083',
       '/api/comments': process.env.VITE_FEED_PROXY_TARGET ?? 'http://localhost:8083',
+      '/api/contact': process.env.VITE_CONTACT_PROXY_TARGET ?? 'http://localhost:8084',
       '/api': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
       '/health': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
       // WebSocket ก็ proxy ได้ — browser เห็น same-origin เหมือนเดิม
