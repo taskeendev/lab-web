@@ -13,9 +13,11 @@
 - [x] 4. Auth client: login/register/refresh อัตโนมัติ/logout + AuthContext + protected routes — 2026-06-12
 - [x] 5. หน้า Login/Register/Account จริง + field errors (RFC 7807) + ตัวบอกสถานะ API — 2026-06-12
 - [x] 6. หน้า Home + System ตามปรัชญา "ให้งานพูดเอง" (2 ภาษา) — 2026-06-12
-- [ ] 7. Deploy Vercel + GitHub Actions CI → URL จริง (เกณฑ์ผ่านเฟส)
+- [x] 7. Deploy Vercel + GitHub Actions CI → URL จริง (เกณฑ์ผ่านเฟส) — 2026-06-12
 
 ## Log การทำงาน
+
+- 2026-06-12 — ขั้น 7 เสร็จ = **เฟส lab-web shell จบ**: vercel.json SPA rewrites + GitHub Actions (npm ci + build=tsc+vite); vercel login (device flow) + link + deploy --prod; URL ทีม (taskeendevs-projects) ติด Deployment Protection 401 — ตัวสาธารณะคือ alias https://lab-web-taupe.vercel.app (ทุก route 200); GitHub auto-connect จาก CLI ไม่ผ่าน (ต้องติดตั้ง Vercel GitHub App ใน dashboard ถ้าอยากได้ push=deploy — ตอนนี้ deploy ผ่าน CLI)
 
 - 2026-06-12 — ขั้น 6 เสร็จ: Home = ตารางฟีเจอร์ 10 ตัวพร้อมป้ายสถานะ (live/building/planned — สถานะอยู่ใน data/features.ts, คำบรรยายอยู่ใน locale) + เครดิตบรรทัดเดียวท้ายหน้า; System = intro "เว็บนี้ไม่ใช่โบรชัวร์ มันคือตัวระบบเอง" + diagram + การตัดสินใจ 4 ข้อพร้อมเหตุผล (jwt/env/microservices/token ใน memory) + ลิงก์ repos; เนื้อหาครบสองภาษา compiler คุม; พลาดเล็กระหว่างทาง: key status ซ้ำ + ทำ system หาย → จับได้จาก tsc แก้ทันที
 
