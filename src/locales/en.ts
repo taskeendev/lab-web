@@ -18,6 +18,20 @@ export const en = {
     loginTitle: 'Login',
     registerTitle: 'Create account',
     accountTitle: 'Account',
+    email: 'Email',
+    username: 'Username',
+    password: 'Password',
+    loginButton: 'Login',
+    registerButton: 'Create account',
+    logoutButton: 'Logout',
+    submitting: 'Working…',
+    noAccount: 'No account yet?',
+    haveAccount: 'Already have an account?',
+    role: 'Role',
+  },
+  status: {
+    online: 'API online',
+    offline: 'API offline — auth features need the backend running',
   },
 } as const
 

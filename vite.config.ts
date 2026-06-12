@@ -15,6 +15,7 @@ export default defineConfig({
     // (ตัด CORS/cookie cross-origin ออกจากสมการตอนพัฒนา)
     proxy: {
       '/api': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
+      '/health': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
     },
   },
 })

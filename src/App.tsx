@@ -1,4 +1,5 @@
 import { NavLink, Route, Routes } from 'react-router'
+import ApiStatus from './components/ApiStatus'
 import LangToggle from './components/LangToggle'
 import ProtectedRoute from './components/ProtectedRoute'
 import ThemeToggle from './components/ThemeToggle'
@@ -19,7 +20,7 @@ export default function App() {
     { to: '/account', label: t.nav.account },
   ]
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <header className="border-b">
         <nav className="mx-auto flex max-w-4xl items-center gap-6 px-4 py-3">
           <span className="font-mono text-sm font-semibold">feature-lab</span>
@@ -42,7 +43,7 @@ export default function App() {
           </div>
         </nav>
       </header>
-      <main className="mx-auto max-w-4xl px-4 py-8">
+      <main className="mx-auto max-w-4xl flex-1 px-4 py-8">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/system" element={<System />} />
@@ -58,6 +59,11 @@ export default function App() {
           />
         </Routes>
       </main>
+      <footer className="border-t">
+        <div className="mx-auto max-w-4xl px-4 py-3">
+          <ApiStatus />
+        </div>
+      </footer>
     </div>
   )
 }

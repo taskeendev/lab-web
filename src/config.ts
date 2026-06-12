@@ -3,4 +3,5 @@
 // prod: ตั้ง VITE_API_URL ชี้ gateway/auth-service จริง
 export const config = {
   apiBaseUrl: import.meta.env.VITE_API_URL ?? '/api',
+  healthUrl: import.meta.env.VITE_HEALTH_URL ?? '/health',
 } as const

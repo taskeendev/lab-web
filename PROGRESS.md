@@ -11,11 +11,13 @@
 - [x] 2. Dark mode: toggle + จำค่า + ตาม OS เป็น default — 2026-06-12
 - [x] 3. i18n EN/TH เขียนเอง (typed keys) — 2026-06-12
 - [x] 4. Auth client: login/register/refresh อัตโนมัติ/logout + AuthContext + protected routes — 2026-06-12
-- [ ] 5. หน้า Login/Register/Account จริง + field errors (RFC 7807) + ตัวบอกสถานะ API
+- [x] 5. หน้า Login/Register/Account จริง + field errors (RFC 7807) + ตัวบอกสถานะ API — 2026-06-12
 - [ ] 6. หน้า Home + System ตามปรัชญา "ให้งานพูดเอง" (2 ภาษา)
 - [ ] 7. Deploy Vercel + GitHub Actions CI → URL จริง (เกณฑ์ผ่านเฟส)
 
 ## Log การทำงาน
+
+- 2026-06-12 — ขั้น 5 เสร็จ: Login (error เดี่ยว), Register (field errors รายช่องจาก problem.errors ใต้ input ตรง ๆ + auto-login หลังสมัคร), Account (ข้อมูล + logout); ApiStatus จุดเขียว/แดงใน footer ping /health ทุก 30s (เพิ่ม /health เข้า vite proxy + healthUrl ใน config) — เว็บ static อยู่ได้เอง บอกตรง ๆ เมื่อ backend ไม่พร้อม; verify: tsc/build, ทุกหน้า transform, health ผ่าน proxy, validation errors รูปร่างตรงที่ฟอร์มใช้
 
 - 2026-06-12 — ขั้น 4 เสร็จ: api/client.ts (access ใน memory เท่านั้น — กัน XSS, ApiError ห่อ RFC 7807 รวม field errors, เจอ 401 → refresh หนึ่งครั้งแล้ว retry); AuthProvider กู้ session เงียบตอนเปิดแอป (refresh cookie → access → /me) + login/register(สมัครแล้วเข้าเลย)/logout; ProtectedRoute รอ loading ก่อนตัดสิน; ทดสอบสายจริงผ่าน vite proxy: login+cookie / refresh rotation / me / logout→refresh 401 ครบ
 
