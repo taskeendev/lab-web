@@ -4,4 +4,7 @@
 export const config = {
   apiBaseUrl: import.meta.env.VITE_API_URL ?? '/api',
   healthUrl: import.meta.env.VITE_HEALTH_URL ?? '/health',
+  presenceWsUrl:
+    import.meta.env.VITE_PRESENCE_WS_URL ??
+    `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/presence`,
 } as const

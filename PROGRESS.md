@@ -17,6 +17,8 @@
 
 ## Log การทำงาน
 
+- 2026-06-12 — (เฟส presence ขั้น 4) lab-web ต่อ presence: PresenceProvider — login แล้วต่อ WS เอง (auth ด้วย access token ปัจจุบัน), heartbeat 30s, หลุดต่อใหม่ใน 3s, logout วางสาย; หน้า /admin (ProtectedRoute role=ADMIN, ลิงก์ nav โผล่เฉพาะแอดมิน) ตารางสด user/since/lastSeen/แท็บ + ป้าย live/reconnecting; vite proxy เพิ่ม /ws แบบ ws:true = browser เห็น same-origin; เทสต์ WS ผ่าน proxy เส้นทางเดียวกับ browser: snapshot/online/offline ครบ
+
 - 2026-06-12 — ขั้น 7 เสร็จ = **เฟส lab-web shell จบ**: vercel.json SPA rewrites + GitHub Actions (npm ci + build=tsc+vite); vercel login (device flow) + link + deploy --prod; URL ทีม (taskeendevs-projects) ติด Deployment Protection 401 — ตัวสาธารณะคือ alias https://lab-web-taupe.vercel.app (ทุก route 200); GitHub auto-connect จาก CLI ไม่ผ่าน (ต้องติดตั้ง Vercel GitHub App ใน dashboard ถ้าอยากได้ push=deploy — ตอนนี้ deploy ผ่าน CLI)
 
 - 2026-06-12 — ขั้น 6 เสร็จ: Home = ตารางฟีเจอร์ 10 ตัวพร้อมป้ายสถานะ (live/building/planned — สถานะอยู่ใน data/features.ts, คำบรรยายอยู่ใน locale) + เครดิตบรรทัดเดียวท้ายหน้า; System = intro "เว็บนี้ไม่ใช่โบรชัวร์ มันคือตัวระบบเอง" + diagram + การตัดสินใจ 4 ข้อพร้อมเหตุผล (jwt/env/microservices/token ใน memory) + ลิงก์ repos; เนื้อหาครบสองภาษา compiler คุม; พลาดเล็กระหว่างทาง: key status ซ้ำ + ทำ system หาย → จับได้จาก tsc แก้ทันที

@@ -33,6 +33,10 @@ export function setAccessToken(token: string | null) {
   accessToken = token
 }
 
+export function getAccessToken(): string | null {
+  return accessToken
+}
+
 async function parseError(res: Response): Promise<never> {
   let problem: Problem = { status: res.status }
   try {

@@ -8,6 +8,17 @@ export const th: Dict = {
     login: 'เข้าสู่ระบบ',
     register: 'สมัครสมาชิก',
     account: 'บัญชี',
+    admin: 'แอดมิน',
+  },
+  admin: {
+    title: 'ใคร online อยู่',
+    live: 'สด',
+    reconnecting: 'กำลังเชื่อมต่อใหม่…',
+    empty: 'ยังไม่มีใคร online ตอนนี้',
+    user: 'ผู้ใช้',
+    since: 'Online ตั้งแต่',
+    lastSeen: 'เห็นล่าสุด',
+    sessions: 'แท็บ',
   },
   home: {
     title: 'Feature Lab',

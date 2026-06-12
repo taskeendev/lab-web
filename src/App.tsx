@@ -3,21 +3,26 @@ import ApiStatus from './components/ApiStatus'
 import LangToggle from './components/LangToggle'
 import ProtectedRoute from './components/ProtectedRoute'
 import ThemeToggle from './components/ThemeToggle'
+import { useAuth } from './auth'
 import { useT } from './i18n'
 import Home from './pages/Home'
 import System from './pages/System'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Account from './pages/Account'
+import Admin from './pages/Admin'
 
 export default function App() {
   const t = useT()
+  const { user } = useAuth()
   const nav = [
     { to: '/', label: t.nav.home },
     { to: '/system', label: t.nav.system },
     { to: '/login', label: t.nav.login },
     { to: '/register', label: t.nav.register },
     { to: '/account', label: t.nav.account },
+    // ลิงก์แอดมินโผล่เฉพาะคนที่มีสิทธิ์ (การคุมจริงอยู่ที่ route + backend)
+    ...(user?.role === 'ADMIN' ? [{ to: '/admin', label: t.nav.admin }] : []),
   ]
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
@@ -54,6 +59,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute role="ADMIN">
+                <Admin />
               </ProtectedRoute>
             }
           />

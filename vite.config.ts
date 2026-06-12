@@ -16,6 +16,11 @@ export default defineConfig({
     proxy: {
       '/api': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
       '/health': process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:8081',
+      // WebSocket ก็ proxy ได้ — browser เห็น same-origin เหมือนเดิม
+      '/ws': {
+        target: process.env.VITE_PRESENCE_PROXY_TARGET ?? 'http://localhost:8082',
+        ws: true,
+      },
     },
   },
 })

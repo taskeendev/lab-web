@@ -6,6 +6,17 @@ export const en = {
     login: 'Login',
     register: 'Register',
     account: 'Account',
+    admin: 'Admin',
+  },
+  admin: {
+    title: 'Who is online',
+    live: 'live',
+    reconnecting: 'reconnecting…',
+    empty: 'Nobody is online right now.',
+    user: 'User',
+    since: 'Online since',
+    lastSeen: 'Last seen',
+    sessions: 'Tabs',
   },
   home: {
     title: 'Feature Lab',
